@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- TRANSLATOR API -->
+    <meta
+      http-equiv="origin-trial"
+      content="An1+GGtt59pL/BTACKYBSD1RzgvwgE7sgjVdLpCaf7Fzs0NWHRGTdkvvQuVh3vFAPJdwase++KMcFT5Tckt9JwgAAABReyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVHJhbnNsYXRpb25BUEkiLCJleHBpcnkiOjE3NTMxNDI0MDB9"
+    />
+
+    <!-- SUMMARIZATION API -->
+    <meta
+      http-equiv="origin-trial"
+      content="AgtzcDGpM6s+riS3vEw9j88jDJ5HB+J8Ao2AgKhCSh2lEa/Wt6NO7CqsbKu+d7UvYg9FfL4xl7n5c0Pt0NddkQoAAABVeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiQUlTdW1tYXJpemF0aW9uQVBJIiwiZXhwaXJ5IjoxNzUzMTQyNDAwfQ=="
+    />
+
+    <!-- LANGUAGE DETECTIOR API -->
+    <meta
+      http-equiv="origin-trial"
+      content="AiW9sinTIgca2x82CpJR/0qeEkkPTozqnoHrs8PgcYMfesS17l384BXTyHh+4OQsLPKEQUP2dQhbWv255J+Z6AgAAABXeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiTGFuZ3VhZ2VEZXRlY3Rpb25BUEkiLCJleHBpcnkiOjE3NDk1OTk5OTl9"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- App header -->
+      <header class="header">
+        <h1 class="header-primary">AI power Texting Processing App</h1>
+        <div class="header-message" hidden aria-hidden="true">
+          Your browser doesn't support all the APIs. If you're in Chrome, enable
+          it by following this
+          <a href="#" aria-label="Enable APIs in Chrome">guide</a>.
+        </div>
+      </header>
+      <form>
+        <textarea id="input" placeholder="Type something..."></textarea>
+        <select id="targetLanguage">
+          <option selected value="es">Spanish</option>
+          <option value="ja">Russian</option>
+          <option value="ja">Turkish</option>
+          <option value="ja">Japanese</option>
+          <option value="fr">French</option>
+          <option value="fr">English</option>
+          <option value="fr">Portuguese</option>
+        </select>
+        <button id="translateButton">Translate</button>
+        <article class="article-text"></article>
+        <output id="output"></output>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
