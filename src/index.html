@@ -35,31 +35,42 @@
           <a href="#" aria-label="Enable APIs in Chrome">guide</a>.
         </div>
       </header>
-      <div id="chatWindow">
-        <div class="output" id="output"></div>
-        <textarea
-          class="input"
-          id="input"
-          aria-label="textarea"
-          placeholder="Type something..."
-        ></textarea>
-        <button aria-required="true" id="button">Send</button>
-      </div>
       <form>
-        <span class="detect-text"></span>
-        <select id="targetLanguage">
-          <option selected value="es">Spanish</option>
-          <option value="ja">Russian</option>
-          <option value="ja">Turkish</option>
-          <option value="ja">Japanese</option>
-          <option value="fr">French</option>
-          <option value="fr">English</option>
-          <option value="fr">Portuguese</option>
-        </select>
-        <button class="send" type="" aria-disabled="true" id="translateButton">
+        <p class="" hidden>I'm <span>not sure what language this is</span>.</p>
+        <label class="" hidden>
+          Translate to:
+          <select id="translate">
+            <option selected value="es">Spanish</option>
+            <option value="ru">Russian</option>
+            <option value="tr">Turkish</option>
+            <option value="ja">Japanese</option>
+            <option value="fr">French</option>
+            <option value="pt">Portuguese</option>
+          </select>
+        </label>
+        <button
+          class="send"
+          type="submit"
+          aria-disabled="true"
+          id="translateButton"
+        >
           Translate
         </button>
+        <output id="output" arria-live="">Output</output>
+        <p id="summarize-text"></p>
+        <label>
+          <textarea
+            class="input"
+            id="input"
+            aria-label="textarea"
+            placeholder="Type something..."
+          ></textarea>
+          <button id="summarize" type="button">Summarize</button>
+        </label>
       </form>
+      <div id="loading-spinner" style="display: none">
+        <img src="" alt="Loading..." />
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
