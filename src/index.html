@@ -35,8 +35,18 @@
           <a href="#" aria-label="Enable APIs in Chrome">guide</a>.
         </div>
       </header>
+      <div id="chatWindow">
+        <div class="output" id="output"></div>
+        <textarea
+          class="input"
+          id="input"
+          aria-label="textarea"
+          placeholder="Type something..."
+        ></textarea>
+        <button aria-required="true" id="button">Send</button>
+      </div>
       <form>
-        <textarea id="input" placeholder="Type something..."></textarea>
+        <span class="detect-text"></span>
         <select id="targetLanguage">
           <option selected value="es">Spanish</option>
           <option value="ja">Russian</option>
@@ -46,9 +56,9 @@
           <option value="fr">English</option>
           <option value="fr">Portuguese</option>
         </select>
-        <button id="translateButton">Translate</button>
-        <article class="article-text"></article>
-        <output id="output"></output>
+        <button class="send" type="" aria-disabled="true" id="translateButton">
+          Translate
+        </button>
       </form>
     </div>
     <script src="script.js"></script>
