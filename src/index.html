@@ -29,16 +29,15 @@
       <!-- App header -->
       <header class="header">
         <h1 class="header-primary">AI power Texting Processing App</h1>
-        <div class="header-message" hidden aria-hidden="true">
-          Your browser doesn't support all the APIs. If you're in Chrome, enable
-          it by following this
-          <a href="#" aria-label="Enable APIs in Chrome">guide</a>.
-        </div>
       </header>
       <form>
-        <p class="" hidden>I'm <span>not sure what language this is</span>.</p>
+        <div>
+          <p class="" hidden>
+            I'm <span>not sure what language this is</span>.
+          </p>
+        </div>
         <label class="" hidden>
-          Translate to:
+          Language:
           <select id="translate">
             <option selected value="es">Spanish</option>
             <option value="ru">Russian</option>
@@ -48,16 +47,22 @@
             <option value="pt">Portuguese</option>
           </select>
         </label>
-        <button
-          class="send"
-          type="submit"
-          aria-disabled="true"
-          id="translateButton"
-        >
-          Translate
-        </button>
+        <!-- Buttons -->
+        <div id="actionButtons" hidden>
+          <button
+            class="send"
+            type="submit"
+            aria-disabled="true"
+            id="translateButton"
+          >
+            Translate
+          </button>
+          <button id="summarize" type="button">Summarize</button>
+        </div>
+        <button id="displayButton" type="button">Icon</button>
         <output id="output" arria-live="">Output</output>
         <p id="summarize-text"></p>
+        <p id="displayOutput"></p>
         <label>
           <textarea
             class="input"
@@ -65,7 +70,6 @@
             aria-label="textarea"
             placeholder="Type something..."
           ></textarea>
-          <button id="summarize" type="button">Summarize</button>
         </label>
       </form>
       <div id="loading-spinner" style="display: none">

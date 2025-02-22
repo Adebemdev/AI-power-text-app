@@ -1,5 +1,6 @@
 class TextProcessor {
   constructor() {
+    this.originalText = '';
     this.initializeElements();
     this.setupEventListeners();
   }
@@ -13,6 +14,9 @@ class TextProcessor {
       summarizeButton: document.getElementById('summarize'),
       targetLanguage: document.getElementById('translate'),
       detectedLanguage: document.querySelector('span'),
+      displayOutput: document.getElementById('displayOutput'),
+      actionButtons: document.getElementById('actionButtons'),
+      displayButton: document.getElementById('displayButton'),
       form: document.querySelector('form'),
       summaryOutput: document.getElementById('summarize-text'),
     };
@@ -27,6 +31,11 @@ class TextProcessor {
 
   // Set up event listeners
   setupEventListeners() {
+    // Display button event
+    this.elements.displayButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.handleDisplay();
+    });
     this.elements.translateButton.addEventListener('click', (e) => {
       e.preventDefault();
       this.handleTranslate();
@@ -35,6 +44,7 @@ class TextProcessor {
     this.elements.summarizeButton.addEventListener('click', (e) => {
       e.preventDefault();
       this.handleSummarize();
+      console.log('Summarizing the text...');
     });
 
     this.elements.messageInput.addEventListener('keypress', (e) => {
@@ -45,6 +55,19 @@ class TextProcessor {
     });
 
     this.elements.form.addEventListener('submit', (e) => e.preventDefault());
+  }
+
+  handleDisplay() {
+    const text = this.elements.messageInput.value.trim();
+    if (!text) {
+      this.showError('Please enter some text first.');
+      return;
+    }
+    this.originalText = text;
+    // Display the text in the output area
+    this.elements.displayOutput.textContent = text;
+    // Reveal the translate and summarize buttons container
+    this.elements.actionButtons.removeAttribute('hidden');
   }
 
   // Convert language code to readable format
@@ -123,7 +146,10 @@ class TextProcessor {
 
   // Handle summarization process
   async handleSummarize() {
-    const text = this.elements.messageInput.value.trim();
+    let text = this.elements.messageInput.value.trim();
+    if (!text && this.originalText) {
+      text = this.originalText;
+    }
     if (!text) {
       this.showError('Please enter some text to summarize');
       return;
@@ -150,15 +176,26 @@ class TextProcessor {
     };
 
     let summarizer;
+    const available = (await self.ai.summarizer.capabilities()).available;
+    console.log(available);
     try {
-      const capabilities = await ai.summarizer.capabilities();
-
-      if (capabilities.available === 'readily') {
-        summarizer = await ai.summarizer.create(options);
-        const result = await summarizer.summarize(text);
-        this.elements.summaryOutput.textContent = result;
+      if (available === 'no') {
+        // The Summarizer API isn't usable.
+        return;
+      }
+      if (available === 'readily') {
+        // The Summarizer API can be used immediately .
+        summarizer = await self.ai.summarizer.create(options);
+        const summary = await summarizer.summarize(text);
+        this.elements.summaryOutput.textContent = summary;
       } else {
-        throw new Error('Summarizer not readily available');
+        // The Summarizer API can be used after the model is downloaded.
+        summarizer = await self.ai.summarizer.create(options);
+
+        summarizer.addEventListener('downloadprogress', (e) => {
+          console.log(e.loaded, e.total);
+        });
+        await summarizer.ready;
       }
     } finally {
       if (summarizer) summarizer.destroy();
