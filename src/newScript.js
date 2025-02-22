@@ -19,6 +19,7 @@ class TextProcessor {
       displayButton: document.getElementById('displayButton'),
       form: document.querySelector('form'),
       summaryOutput: document.getElementById('summarize-text'),
+      originalSummary: document.getElementById('originalSummary'),
     };
 
     // Validate required elements
@@ -45,6 +46,11 @@ class TextProcessor {
       e.preventDefault();
       this.handleSummarize();
       console.log('Summarizing the text...');
+    });
+
+    this.elements.targetLanguage.addEventListener('change', () => {
+      // Translate using the original text (if available) or current input
+      this.handleTranslate();
     });
 
     this.elements.messageInput.addEventListener('keypress', (e) => {
@@ -85,7 +91,8 @@ class TextProcessor {
 
   // Handle translation process
   async handleTranslate() {
-    const message = this.elements.messageInput.value.trim();
+    const message =
+      this.elements.messageInput.value.trim() || this.originalText;
     if (!message) {
       this.showError('Please enter some text to translate');
       return;
@@ -122,7 +129,7 @@ class TextProcessor {
 
       this.elements.detectedLanguage.textContent = `${(
         confidence * 100
-      ).toFixed(1)}% sure that this is ${languageName}`;
+      ).toFixed(1)}% ${languageName}`;
     } catch (error) {
       throw new Error('Language detection failed');
     }
@@ -154,6 +161,14 @@ class TextProcessor {
       this.showError('Please enter some text to summarize');
       return;
     }
+
+    if (text.length < 150) {
+      this.showError('Please enter at least 150 characters to summarize.');
+      return;
+    }
+
+    // Display the text being summarized so users can review it
+    this.elements.originalSummary.textContent = text;
 
     try {
       await this.summarizeText(text);
@@ -205,7 +220,6 @@ class TextProcessor {
   // UI helper function for errors
   showError(message) {
     console.error(message);
-    // You could add a proper error display UI here
     this.elements.messageOutput.textContent = message;
   }
 }

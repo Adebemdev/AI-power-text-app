@@ -31,13 +31,23 @@
         <h1 class="header-primary">AI power Texting Processing App</h1>
       </header>
       <form>
-        <div>
-          <p class="" hidden>
-            I'm <span>not sure what language this is</span>.
-          </p>
+        <div class="primary-text" hidden>
+          <p class="">I'm <span>not sure what language this is</span>.</p>
         </div>
-        <label class="" hidden>
-          Language:
+        <div class="" hidden>
+          <strong>Translation:</strong>
+          <p class="output" id="output"></p>
+        </div>
+        <div class="" hidden>
+          <strong>Summary:</strong>
+          <p class="output" id="summarize-text"></p>
+        </div>
+        <div class="" hidden>
+          <strong>Text Being Summarized:</strong>
+          <p id="originalSummary"></p>
+        </div>
+        <div class="card-lang" id="actionButtons" hidden>
+          <label for="translate" class="" hidden> Language: </label>
           <select id="translate">
             <option selected value="es">Spanish</option>
             <option value="ru">Russian</option>
@@ -46,9 +56,7 @@
             <option value="fr">French</option>
             <option value="pt">Portuguese</option>
           </select>
-        </label>
-        <!-- Buttons -->
-        <div id="actionButtons" hidden>
+          <!-- Buttons -->
           <button
             class="send"
             type="submit"
@@ -59,18 +67,30 @@
           </button>
           <button id="summarize" type="button">Summarize</button>
         </div>
-        <button id="displayButton" type="button">Icon</button>
-        <output id="output" arria-live="">Output</output>
-        <p id="summarize-text"></p>
+
         <p id="displayOutput"></p>
-        <label>
+        <div class="card-footer">
           <textarea
-            class="input"
+            class="input-chat"
             id="input"
             aria-label="textarea"
             placeholder="Type something..."
           ></textarea>
-        </label>
+          <div class="send-icon" id="displayButton">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e8eaed"
+              class="send"
+            >
+              <path
+                d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"
+              />
+            </svg>
+          </div>
+        </div>
       </form>
       <div id="loading-spinner" style="display: none">
         <img src="" alt="Loading..." />
