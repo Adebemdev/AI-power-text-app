@@ -25,26 +25,28 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- App header -->
     <div class="container">
-      <!-- App header -->
       <header class="header">
         <h1 class="header-primary">AI power Texting Processing App</h1>
       </header>
       <form>
-        <div class="primary-text" hidden>
-          <p class="">I'm <span>not sure what language this is</span>.</p>
-        </div>
-        <div class="" hidden>
-          <strong>Translation:</strong>
-          <p class="output" id="output"></p>
-        </div>
-        <div class="" hidden>
-          <strong>Summary:</strong>
-          <p class="output" id="summarize-text"></p>
-        </div>
-        <div class="" hidden>
-          <strong>Text Being Summarized:</strong>
-          <p id="originalSummary"></p>
+        <div class="chat-body">
+          <div class="primary-text" hidden>
+            <p class="">I'm <span>not sure what language this is</span>.</p>
+          </div>
+          <div class="chat-message" hidden>
+            <strong>Translation:</strong>
+            <p class="output" id="output"></p>
+          </div>
+          <div class="chat-message bot-message" hidden>
+            <strong>Summary:</strong>
+            <p class="output" id="summarize-text"></p>
+          </div>
+          <div class="chat-message" hidden>
+            <strong>Text Being Summarized:</strong>
+            <p id="originalSummary"></p>
+          </div>
         </div>
         <div class="card-lang" id="actionButtons" hidden>
           <label for="translate" class="" hidden> Language: </label>
